@@ -1,0 +1,30 @@
+<configuration  debug="true">
+ <contextName>Your Context</contextName>
+ <appender name="ROLLINGFILE"
+  class="ch.qos.logback.core.rolling.RollingFileAppender">
+  <file>log\application.log</file>
+  <append>true</append>
+  <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+   <fileNamePattern>log\archives\applicationlog-%d{yyyy-MM}.%i.zip
+   </fileNamePattern>
+   <maxHistory>10</maxHistory>
+   <timeBasedFileNamingAndTriggeringPolicy
+    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+    <maxFileSize>100KB</maxFileSize>
+
+   </timeBasedFileNamingAndTriggeringPolicy>
+  </rollingPolicy>
+	
+
+  <encoder>
+   <pattern>Proxy forwarding for %X{req.xForwardedFor} %n %d{dd-mm-yyyy hh:mm:ss}- %-5level %logger{15} - %msg%n</pattern>
+  </encoder>
+ </appender>
+ <root>
+  <appender-ref ref="ROLLINGFILE" />
+ </root>
+ <logger name="com.scala.examples"  level="debug">
+  <appender-ref ref="ROLLINGFILE" />
+ </logger>
+
+</configuration>
